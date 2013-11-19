@@ -1,0 +1,17 @@
+one: 
+  email: testone@wyshme.com
+  first_name: First
+  last_name: Person
+
+two:
+  email: testtwo@wyshme.com
+  first_name: Second
+  last_name: Person
+
+# Generate 8 more users
+<% 8.times do |n| %>
+user_<%= n %>:
+  email: user_<%= n %>@wyshme.com
+  first_name: User <%= n %> first name
+  last_name: User <%= n %> last name
+<% end %>

@@ -1,0 +1,6 @@
+<% 100.times do |n| %>
+item_<%= n %>:
+  name: Item <%= n %>
+  description: Blah blah, lorum ipsum, etc.
+  price: <%= n %>
+<% end %>
