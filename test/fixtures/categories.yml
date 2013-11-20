@@ -1,0 +1,6 @@
+# Create 15 categories
+<% 15.times do |n| %>
+category_<%= n %>:
+  name: Category <%= n %>
+  description: Ipsum dollar
+<% end %>

@@ -1,0 +1,10 @@
+# For 9 categories assign items
+<% 9.times do |cat_n| %>
+# 10 items in each category
+<% 10.times do |n| %>
+<% item_n = 10 * cat_n + n %>
+category_item_<%= "#{ cat_n }_#{ item_n }" %>:
+  category: category_<%= cat_n %>
+  item: item_<%= item_n %>
+<% end %>
+<% end %>
