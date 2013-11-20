@@ -16,5 +16,6 @@ Test application with:
 TODO:
 
 1. Generate and return API's oAuth token on successfull user login.
-
 2. Add roles, provide access to API's endpoints depend on role.
+3. Add default DB seed for development environment to have some items, categories,
+users, and their boards setuped on fresh installation.
