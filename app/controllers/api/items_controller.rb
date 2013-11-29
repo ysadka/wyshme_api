@@ -1,6 +1,6 @@
 module Api
   class ItemsController < BaseController
-    doorkeeper_for :all
+    doorkeeper_for :create, :update, :destroy
 
     before_action :find_item, only: [:show, :update, :destroy]
 
