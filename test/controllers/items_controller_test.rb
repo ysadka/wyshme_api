@@ -11,20 +11,26 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   test "should respond with items" do
-    get :index, { access_token: @token }
+    get(:index)
     assert_response(:success, 'response is not successful')
     assert_not_nil(assigns(:items), '@items is not assigned')
     assert_equal(10, assigns(:items).size, '@items size is not 10')
 
-    get(:index, { access_token: @token, page: 11, per_page: 9 })
+    get(:index, { page: 11, per_page: 9 })
     assert_response(:success, 'response is not successful')
     assert_not_nil(assigns(:items), '@items is not assigned')
     assert_equal(1, assigns(:items).size, '@items size is not 1')
 
-    get(:index, { access_token: @token, page: 5, per_page: 20 })
+    get(:index, { page: 5, per_page: 20 })
     assert_response(:success, 'response is not successful')
     assert_not_nil(assigns(:items), '@items is not assigned')
     assert_equal(0, assigns(:items).size, '@items size is not 0')
+
+    item_ids = [items(:item_1), items(:item_12), items(:item_58)]
+    get(:index, { ids: item_ids })
+    assert_response(:success, 'response is not successful')
+    assert_not_nil(assigns(:items), '@items is not assigned')
+    assert_equal(3, assigns(:items).size, '@items size is not 3')
   end
 
   test 'should create item' do

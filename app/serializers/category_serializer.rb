@@ -1,6 +1,10 @@
 class CategorySerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :is_deleted, :errors
+  attributes :id, :name, :description, :items_count, :is_deleted, :errors
   has_many :items, embed: :ids
+
+  def items_count
+    object.items.count
+  end
 
   def is_deleted
     object.destroyed?
