@@ -67,7 +67,7 @@ class BoardsControllerTest < ActionController::TestCase
     post(:create, { board: board, access_token: @token })
     response_and_model_test(board, 'board', false, 'success')
 
-    board_id = JSON.parse(@response.body)['board']['id']
+    board_id = JSON.parse(@response.body)['id']
     get(:show, { id: board_id, access_token: @token })
     response_and_model_test(board, 'board', false, 'success')
   end
@@ -78,7 +78,7 @@ class BoardsControllerTest < ActionController::TestCase
     post(:create, { board: board, access_token: @token })
     response_and_model_test(board, 'board', false, 'success')
 
-    board_id = JSON.parse(@response.body)['board']['id']
+    board_id = JSON.parse(@response.body)['id']
     board[:name] = 'New name of the board'
 
     patch(:update, { id: board_id, board: board, access_token: @token })
@@ -93,7 +93,7 @@ class BoardsControllerTest < ActionController::TestCase
     post(:create, { board: board, access_token: @token })
     response_and_model_test(board, 'board', false, 'success')
 
-    board_id = JSON.parse(@response.body)['board']['id']
+    board_id = JSON.parse(@response.body)['id']
     board[:name] = 'Name was changed'
     board[:item_ids] << items(:item_8).id
 
@@ -107,7 +107,7 @@ class BoardsControllerTest < ActionController::TestCase
     post(:create, { board: board, access_token: @token })
     response_and_model_test(board, 'board', false, 'success')
 
-    board_id = JSON.parse(@response.body)['board']['id']
+    board_id = JSON.parse(@response.body)['id']
     board[:name] = nil
 
     patch(:update, { id: board_id, board: board, access_token: @token })
@@ -120,7 +120,7 @@ class BoardsControllerTest < ActionController::TestCase
     post(:create, { board: board, access_token: @token })
     response_and_model_test(board, 'board', false, 'success')
 
-    board_id = JSON.parse(@response.body)['board']['id']
+    board_id = JSON.parse(@response.body)['id']
 
     delete(:destroy, { id: board_id, access_token: @token })
     response_and_model_test(board, 'board', true, 'success')

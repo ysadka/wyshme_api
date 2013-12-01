@@ -26,12 +26,17 @@ class ActiveSupport::TestCase
     fields.each do |k, v|
       next if [:password, :password_confirmation].include?(k)
 
-      if v.is_a?(Array) && resp[k].is_a?(Array)
-        v.sort! 
-        resp[k].sort!
-      end
+      v.sort! if v.is_a?(Array)
+      resp[k].sort! if resp[k].is_a?(Array)
 
-      assert_equal(v, resp[k], "#{ k } value is not the same as posted")
+      res = if k.to_s.end_with?('_ids') # test nested models
+              key = k.to_s.gsub(/_ids$/, '').pluralize.to_sym
+
+              resp[key].map { |r| r['id'] }.sort
+            else
+              resp[k]
+            end
+      assert_equal(v, res, "#{ k } value is not the same as posted")
     end
   end
 
@@ -42,7 +47,7 @@ class ActiveSupport::TestCase
     assert_not_nil(assigns(model_name.to_sym),
                    "@#{ model_name } is not assigned")
 
-    res_model = JSON.parse(@response.body)[model_name].symbolize_keys!
+    res_model = JSON.parse(@response.body).symbolize_keys!
     assert_equal(deleted, res_model[:is_deleted],
                  "@#{ model_name } is #{ deleted ? 'not ' : '' }" \
                  'marked as deleted')
