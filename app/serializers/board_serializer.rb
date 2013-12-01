@@ -1,7 +1,7 @@
 class BoardSerializer < ActiveModel::Serializer
   attributes :id, :name, :description, :event, :event_at,
              :user_id, :is_deleted, :errors
-  has_many :items, embed: :ids
+  has_many :items
 
   def user_id
     object.user_id

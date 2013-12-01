@@ -1,7 +1,6 @@
 class ItemSerializer < ActiveModel::Serializer
   attributes :id, :name, :description, :price, :is_deleted, :errors
-  has_many :boards, embed: :ids
-  has_many :categories, embed: :ids
+  has_many :categories
 
   def is_deleted
     object.destroyed?
