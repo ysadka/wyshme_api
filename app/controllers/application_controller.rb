@@ -15,6 +15,7 @@ class ApplicationController < ActionController::API
     ids = params.fetch(:ids, "")
       .split(',').map(&:to_i)
       .uniq.delete_if { |id| id < 1 }
+
     if ids.empty?
       limit = params.fetch(:per_page, 10).to_i
       offset = params.fetch(:page, 0).to_i * limit
