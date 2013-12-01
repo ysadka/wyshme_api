@@ -1,6 +1,5 @@
 class CategorySerializer < ActiveModel::Serializer
   attributes :id, :name, :description, :items_count, :is_deleted, :errors
-  has_many :items, embed: :ids
 
   def items_count
     object.items.count

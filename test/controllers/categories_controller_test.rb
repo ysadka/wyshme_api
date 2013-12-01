@@ -34,28 +34,9 @@ class CategoriesControllerTest < ActionController::TestCase
     response_and_model_test(category, 'category', false, 'success')
   end
 
-  test 'should create category and assign items' do
-    category = default_category
-    category.merge!({ item_ids: [ items(:item_4).id,
-                                  items(:item_7).id ] })
-
-    post(:create, { access_token: @token, category: category })
-    response_and_model_test(category, 'category', false, 'success')
-  end
-
   test 'should not create category' do
     category = default_category
     category.delete(:name)
-
-    post(:create, { access_token: @token, category: category })
-    response_and_model_test(category, 'category', false, 'error')
-  end
-
-  test 'should not create category and associations' do
-    category = default_category
-    category.delete(:name)
-    category.merge!({ item_ids: [ items(:item_30).id,
-                                  items(:item_73).id ] })
 
     post(:create, { access_token: @token, category: category })
     response_and_model_test(category, 'category', false, 'error')
@@ -67,7 +48,7 @@ class CategoriesControllerTest < ActionController::TestCase
     post(:create, { access_token: @token, category: category })
     response_and_model_test(category, 'category', false, 'success')
 
-    category_id = JSON.parse(@response.body)['category']['id']
+    category_id = JSON.parse(@response.body)['id']
     get(:show, { id: category_id, access_token: @token })
     response_and_model_test(category, 'category', false, 'success')
   end
@@ -78,26 +59,10 @@ class CategoriesControllerTest < ActionController::TestCase
     post(:create, { access_token: @token, category: category })
     response_and_model_test(category, 'category', false, 'success')
 
-    category_id = JSON.parse(@response.body)['category']['id']
+    category_id = JSON.parse(@response.body)['id']
     category[:name] = 'New name of the category'
 
     patch(:update, { id: category_id, access_token: @token,  category: category })
-    response_and_model_test(category, 'category', false, 'success')
-  end
-
-  test 'should create category and its associations and then update them' do
-    category = default_category
-    category.merge!({ item_ids: [ items(:item_0).id,
-                                  items(:item_3).id ] })
-
-    post(:create, { access_token: @token, category: category })
-    response_and_model_test(category, 'category', false, 'success')
-
-    category_id = JSON.parse(@response.body)['category']['id']
-    category[:name] = 'Name was changed'
-    category[:item_ids] << items(:item_8).id
-
-    patch(:update, { id: category_id, access_token: @token, category: category })
     response_and_model_test(category, 'category', false, 'success')
   end
 
@@ -107,7 +72,7 @@ class CategoriesControllerTest < ActionController::TestCase
     post(:create, { access_token: @token, category: category })
     response_and_model_test(category, 'category', false, 'success')
 
-    category_id = JSON.parse(@response.body)['category']['id']
+    category_id = JSON.parse(@response.body)['id']
     category[:name] = nil
 
     patch(:update, { access_token: @token, id: category_id, category: category })
@@ -120,7 +85,7 @@ class CategoriesControllerTest < ActionController::TestCase
     post(:create, { category: category, access_token: @token })
     response_and_model_test(category, 'category', false, 'success')
 
-    category_id = JSON.parse(@response.body)['category']['id']
+    category_id = JSON.parse(@response.body)['id']
 
     delete(:destroy, { id: category_id, access_token: @token })
     response_and_model_test(category, 'category', true, 'success')

@@ -48,7 +48,7 @@ class UsersControllerTest < ActionController::TestCase
     post(:create, { user: user, access_token: @token })
     response_and_model_test(user, 'user', false, 'success')
 
-    user_id = JSON.parse(@response.body)['user']['id']
+    user_id = JSON.parse(@response.body)['id']
     get(:show, { id: user_id })
     response_and_model_test(user, 'user', false, 'success')
   end
@@ -59,7 +59,7 @@ class UsersControllerTest < ActionController::TestCase
     post(:create, { user: user, access_token: @token })
     response_and_model_test(user, 'user', false, 'success')
 
-    user_id = JSON.parse(@response.body)['user']['id']
+    user_id = JSON.parse(@response.body)['id']
     user[:email] = 'any_new@email.com'
 
     patch(:update, { id: user_id, user: user, access_token: @token })
@@ -72,7 +72,7 @@ class UsersControllerTest < ActionController::TestCase
     post(:create, { user: user, access_token: @token })
     response_and_model_test(user, 'user', false, 'success')
 
-    user_id = JSON.parse(@response.body)['user']['id']
+    user_id = JSON.parse(@response.body)['id']
     user[:email] = nil
 
     patch(:update, { id: user_id, user: user, access_token: @token })
@@ -85,7 +85,7 @@ class UsersControllerTest < ActionController::TestCase
     post(:create, { user: user, access_token: @token })
     response_and_model_test(user, 'user', false, 'success')
 
-    user_id = JSON.parse(@response.body)['user']['id']
+    user_id = JSON.parse(@response.body)['id']
 
     delete(:destroy, { id: user_id, access_token: @token })
     response_and_model_test(user, 'user', true, 'success')

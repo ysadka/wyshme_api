@@ -47,8 +47,6 @@ module Api
     end
 
     def set_item_associations
-      # TODO: ensure board_ids is related to current user
-      set_associations(@item, Board, params[:item][:board_ids])
       set_associations(@item, Category, params[:item][:category_ids])
     end
 

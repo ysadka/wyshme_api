@@ -12,7 +12,6 @@ module Api
 
     def create
       @category = Category.new(category_params)
-      set_associations(@category, Item, params[:category][:item_ids])
       status = @category.save
 
       render json: @category, meta: gen_meta(status)
@@ -24,7 +23,6 @@ module Api
 
     def update
       @category.assign_attributes(category_params)
-      set_associations(@category, Item, params[:category][:item_ids])
       status = @category.save
 
       render json: @category, meta: gen_meta(status)
