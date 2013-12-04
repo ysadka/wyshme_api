@@ -1,6 +1,6 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :first_name, :last_name, :is_deleted, :errors
-  has_many :boards, embed: :ids
+  attributes :id, :email, :first_name, :last_name,
+             :access_token, :is_deleted, :errors
 
   def is_deleted
     object.destroyed?
