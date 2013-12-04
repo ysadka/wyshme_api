@@ -44,6 +44,10 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def default_serializer_options
+    { root: false }
+  end
+
   private
 
   def set_cors_headers
