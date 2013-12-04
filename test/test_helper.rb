@@ -69,8 +69,8 @@ class ActiveSupport::TestCase
 
   def setup_token
     user = users(:one)
-    application = Doorkeeper::Application.create!(name: "MyApp",
-                                                  redirect_uri: "http://wyshme.com")
+    application = Doorkeeper::Application.create!(name: 'MyApp',
+                                                  redirect_uri: 'http://wyshme.com')
     @token = Doorkeeper::AccessToken.create!(application_id: application.id,
                                              resource_owner_id: user.id).token
   end

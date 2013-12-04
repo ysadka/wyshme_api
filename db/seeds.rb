@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# This is root Doorkeeper's application which represents API itself
+Doorkeeper::Application.create!(name: 'WyshMeAPIRoot',
+                                redirect_uri: 'http://wyshme.com')
