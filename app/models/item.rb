@@ -4,5 +4,12 @@ class Item < ActiveRecord::Base
   has_many :categories_items, dependent: :destroy
   has_many :categories, through: :categories_items
 
+  has_attached_file :image, styles: { 
+    medium: "300x300>",
+    thumb: "100x100>"
+    }, default_url: "/images/:style/missing.png"  
+
   validates :name, presence: true
+  validates :image, attachment_presence: true
+  validates_with AttachmentPresenceValidator, attributes: :image
 end
