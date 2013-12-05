@@ -26,5 +26,7 @@ module WyshmeApi
     # config.i18n.default_locale = :de
 
     config.autoload_paths += %W["#{config.root}/app/validators/"]
+
+    config.assets.initialize_on_precompile = false
   end
 end
