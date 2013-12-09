@@ -7,6 +7,12 @@ class ApplicationController < ActionController::API
   #protect_from_forgery with: :null_session #:exception
   before_filter :set_cors_headers
 
+  def cors_preflight_check
+    headers['Access-Control-Max-Age'] = '1728000'
+
+    render json: {}
+  end
+
   protected
 
   def load_paginated(klass, with_user = false)
@@ -52,7 +58,7 @@ class ApplicationController < ActionController::API
 
   def set_cors_headers
     headers['Access-Control-Allow-Origin'] = '*'
-    headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
+    headers['Access-Control-Allow-Methods'] = 'POST, PUT, PATCH, DELETE, GET, OPTIONS'
     headers['Access-Control-Request-Method'] = '*'
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   end

@@ -6,8 +6,6 @@ WyshmeApi::Application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  root to: 'static_pages#index'
-
   namespace :api do
     resources :users, except: [:new] do
       get :me, on: :collection
@@ -17,6 +15,9 @@ WyshmeApi::Application.routes.draw do
     resources :categories, except: [:new]
   end
 
+  root to: 'static_pages#index'
+
+  match '*path', to: 'application#cors_preflight_check', via: [:options]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
