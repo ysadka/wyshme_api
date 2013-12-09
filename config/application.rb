@@ -28,5 +28,12 @@ module WyshmeApi
     config.autoload_paths += %W["#{config.root}/app/validators/"]
 
     config.assets.initialize_on_precompile = false
+
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Allow-Methods' => 'POST, PUT, DELETE, GET, OPTIONS',
+      'Access-Control-Request-Method' => '*',
+      'Access-Control-Allow-Headers' => 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    }
   end
 end
