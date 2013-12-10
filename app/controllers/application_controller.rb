@@ -5,7 +5,6 @@ class ApplicationController < ActionController::API
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   #protect_from_forgery with: :null_session #:exception
-  before_filter :set_cors_headers
 
   def cors_preflight_check
     headers['Access-Control-Max-Age'] = '1728000'
@@ -52,15 +51,6 @@ class ApplicationController < ActionController::API
 
   def default_serializer_options
     { root: false }
-  end
-
-  private
-
-  def set_cors_headers
-    headers['Access-Control-Allow-Origin'] = '*'
-    headers['Access-Control-Allow-Methods'] = 'POST, PUT, PATCH, DELETE, GET, OPTIONS'
-    headers['Access-Control-Request-Method'] = '*'
-    headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   end
 
 end
