@@ -1,6 +1,6 @@
 module Api
   class CategoriesController < BaseController
-    doorkeeper_for :all
+    doorkeeper_for :create, :update, :destroy
 
     before_action :find_category, only: [:show, :update, :destroy]
 
