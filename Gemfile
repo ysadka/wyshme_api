@@ -27,6 +27,8 @@ gem 'rails_12factor', group: :production
 gem 'foreman'
 gem 'puma'
 
+gem 'composite_primary_keys'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
