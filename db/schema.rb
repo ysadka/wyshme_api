@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204011752) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20131220190511) do
 
   create_table "boards", force: true do |t|
     t.integer  "user_id"
@@ -31,8 +28,8 @@ ActiveRecord::Schema.define(version: 20131204011752) do
     t.integer "item_id",  null: false
   end
 
-  add_index "boards_items", ["board_id"], name: "index_boards_items_on_board_id", using: :btree
-  add_index "boards_items", ["item_id"], name: "index_boards_items_on_item_id", using: :btree
+  add_index "boards_items", ["board_id"], name: "index_boards_items_on_board_id"
+  add_index "boards_items", ["item_id"], name: "index_boards_items_on_item_id"
 
   create_table "categories", force: true do |t|
     t.string   "name",        null: false
@@ -46,11 +43,27 @@ ActiveRecord::Schema.define(version: 20131204011752) do
     t.integer "item_id",     null: false
   end
 
-  add_index "categories_items", ["category_id"], name: "index_categories_items_on_category_id", using: :btree
-  add_index "categories_items", ["item_id"], name: "index_categories_items_on_item_id", using: :btree
+  add_index "categories_items", ["category_id"], name: "index_categories_items_on_category_id"
+  add_index "categories_items", ["item_id"], name: "index_categories_items_on_item_id"
+
+  create_table "item_likes", force: true do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+  end
+
+  add_index "item_likes", ["item_id"], name: "index_item_likes_on_item_id"
+  add_index "item_likes", ["user_id"], name: "index_item_likes_on_user_id"
+
+  create_table "item_wyshes", force: true do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+  end
+
+  add_index "item_wyshes", ["item_id"], name: "index_item_wyshes_on_item_id"
+  add_index "item_wyshes", ["user_id"], name: "index_item_wyshes_on_user_id"
 
   create_table "items", force: true do |t|
-    t.string   "name",                                        null: false
+    t.string   "name",                                                    null: false
     t.text     "description"
     t.decimal  "price",              precision: 10, scale: 2
     t.datetime "created_at"
@@ -59,6 +72,10 @@ ActiveRecord::Schema.define(version: 20131204011752) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "url"
+    t.string   "retailer"
+    t.integer  "likes",                                       default: 0
+    t.integer  "wyshes",                                      default: 0
   end
 
   create_table "oauth_access_grants", force: true do |t|
@@ -72,7 +89,7 @@ ActiveRecord::Schema.define(version: 20131204011752) do
     t.string   "scopes"
   end
 
-  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
+  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true
 
   create_table "oauth_access_tokens", force: true do |t|
     t.integer  "resource_owner_id"
@@ -85,9 +102,9 @@ ActiveRecord::Schema.define(version: 20131204011752) do
     t.string   "scopes"
   end
 
-  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
-  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
-  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
+  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true
+  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"
+  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true
 
   create_table "oauth_applications", force: true do |t|
     t.string   "name",                      null: false
@@ -98,7 +115,7 @@ ActiveRecord::Schema.define(version: 20131204011752) do
     t.datetime "updated_at"
   end
 
-  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
+  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
 
   create_table "users", force: true do |t|
     t.string   "first_name"
@@ -117,7 +134,7 @@ ActiveRecord::Schema.define(version: 20131204011752) do
     t.string   "last_sign_in_ip"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

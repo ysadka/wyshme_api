@@ -3,7 +3,14 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
   has_many :boards
+
+  has_many :item_likes
+  has_many :liked_items, through: :item_likes, class_name: :item
+
+  has_many :item_wyshes
+  has_many :wyshed_items, through: :item_wyshes, class_name: :item
 
   validates :email,
             presence: true,
