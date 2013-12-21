@@ -1,8 +1,8 @@
 module Api
   class ItemsController < BaseController
-    doorkeeper_for :create, :update, :destroy
+    doorkeeper_for :create, :update, :destroy, :like, :wysh
 
-    before_action :find_item, only: [:show, :update, :destroy]
+    before_action :find_item, only: [:show, :update, :destroy, :like, :wysh]
 
     def index
       @items = load_paginated(Item)
@@ -36,10 +36,31 @@ module Api
       render json: @item, meta: gen_meta(status)
     end
 
+    # PUT /api/items/ITEM_ID/like
+    def like
+      ItemLike.find_or_create_by(user_id: current_user.id,
+                                 item_id: @item.id)
+
+      @item.update_attribute(:likes, @item.item_likes.count)
+
+      render json: @item
+    end
+
+    # PUT /api/items/ITEM_ID/wysh
+    def wysh
+      ItemWysh.find_or_create_by(user_id: current_user.id,
+                                 item_id: @item.id)
+
+      @item.update_attribute(:wyshes, @item.item_wyshes.count)
+
+      render json: @item
+    end
+
     private
 
     def item_params
-      params.require(:item).permit(:name, :description, :price, :image)
+      params.require(:item).permit(:name, :description,
+                                   :price, :image, :url, :retailer)
     end
 
     def find_item
