@@ -38,8 +38,8 @@ module Api
 
     # PUT /api/items/ITEM_ID/like
     def like
-      ilike = ItemLike.find_or_create_by(user_id: current_user.id,
-                                         item_id: @item.id)
+      ItemLike.find_or_create_by(user_id: current_user.id,
+                                 item_id: @item.id)
 
       @item.update_attribute(:likes, @item.item_likes.count)
 
@@ -48,8 +48,8 @@ module Api
 
     # PUT /api/items/ITEM_ID/wysh
     def wysh
-      iwysh = ItemWysh.find_or_create_by(user_id: current_user.id,
-                                         item_id: @item.id)
+      ItemWysh.find_or_create_by(user_id: current_user.id,
+                                 item_id: @item.id)
 
       @item.update_attribute(:wyshes, @item.item_wyshes.count)
 
@@ -59,7 +59,8 @@ module Api
     private
 
     def item_params
-      params.require(:item).permit(:name, :description, :price, :image)
+      params.require(:item).permit(:name, :description,
+                                   :price, :image, :url, :retailer)
     end
 
     def find_item
