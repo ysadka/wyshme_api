@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
-  has_many :boards_items, dependent: :destroy
-  has_many :boards, through: :boards_items
+  has_many :items_lists, dependent: :destroy
+  has_many :lists, through: :items_lists
 
   has_many :categories_items, dependent: :destroy
   has_many :categories, through: :categories_items

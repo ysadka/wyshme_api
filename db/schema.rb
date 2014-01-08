@@ -11,25 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131220190511) do
-
-  create_table "boards", force: true do |t|
-    t.integer  "user_id"
-    t.string   "name",        null: false
-    t.text     "description"
-    t.string   "event"
-    t.date     "event_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "boards_items", id: false, force: true do |t|
-    t.integer "board_id", null: false
-    t.integer "item_id",  null: false
-  end
-
-  add_index "boards_items", ["board_id"], name: "index_boards_items_on_board_id"
-  add_index "boards_items", ["item_id"], name: "index_boards_items_on_item_id"
+ActiveRecord::Schema.define(version: 20140108195139) do
 
   create_table "categories", force: true do |t|
     t.string   "name",        null: false
@@ -76,6 +58,24 @@ ActiveRecord::Schema.define(version: 20131220190511) do
     t.string   "retailer"
     t.integer  "likes",                                       default: 0
     t.integer  "wyshes",                                      default: 0
+  end
+
+  create_table "items_lists", id: false, force: true do |t|
+    t.integer "list_id", null: false
+    t.integer "item_id", null: false
+  end
+
+  add_index "items_lists", ["item_id"], name: "index_items_lists_on_item_id"
+  add_index "items_lists", ["list_id"], name: "index_items_lists_on_list_id"
+
+  create_table "lists", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name",        null: false
+    t.text     "description"
+    t.string   "event"
+    t.date     "event_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "oauth_access_grants", force: true do |t|

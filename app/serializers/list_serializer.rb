@@ -1,4 +1,4 @@
-class BoardSerializer < ActiveModel::Serializer
+class ListSerializer < ActiveModel::Serializer
   attributes :id, :name, :description, :event, :event_at,
              :user_id, :is_deleted, :errors
   has_many :items

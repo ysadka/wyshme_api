@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :boards
+  has_many :lists
 
   has_many :item_likes
   has_many :liked_items, through: :item_likes, class_name: :item

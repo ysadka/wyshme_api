@@ -1,0 +1,12 @@
+# For both users
+<% list_n = 0 %>
+<% ['one', 'two'].each do |user_name| %>
+# create 5 lists, list indexes are in [0, 9]
+<% 5.times do |n| %>
+list_<%= list_n %>:
+  user: <%= user_name %>
+  name: <%= "#{ user_name }'s #{ n } list" %>
+  event: Event <%= list_n %>
+<% list_n += 1 %>
+<% end %>
+<% end %>
