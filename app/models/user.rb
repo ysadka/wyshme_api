@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :lists
 
+  has_many :events
+
   has_many :item_likes
   has_many :liked_items, through: :item_likes, class_name: :item
 
