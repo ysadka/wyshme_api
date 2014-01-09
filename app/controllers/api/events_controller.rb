@@ -44,7 +44,7 @@ module Api
 
     def find_event
       # TODO: load event only if current user is its owner
-      @event = current_user.event.where(id: params[:id]).first
+      @event = current_user.events.where(id: params[:id]).first
     end
 
   end
