@@ -18,6 +18,8 @@ module Api
       @user = User.new(user_params)
       status = @user.save
 
+      UserMailer.welcome_email(@user).deliver if status
+
       render json: @user, meta: gen_meta(status)
     end
 
