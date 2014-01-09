@@ -36,39 +36,39 @@ class ItemTest < ActiveSupport::TestCase
     assert_not(item.save, 'Item without name with description and price is saved')
   end
 
-  test 'should create items and add categories/boards to them' do
+  test 'should create items and add categories/lists to them' do
     itm_name = 'Test item with associations'
     item = Item.new(name: itm_name)
     assert(item.save, 'Item is not saved')
     assert_equal(itm_name, item.name, 'Passed and actual names are different')
 
-    itm_boards = [boards(:board_3), boards(:board_1)]
-    item.boards = itm_boards
+    itm_lists = [lists(:list_3), lists(:list_1)]
+    item.lists = itm_lists
     assert(item.save, 'Item is not saved')
     assert_equal(itm_name, item.name, 'Passed and actual names are different')
-    assert_equal(itm_boards.size, item.boards.size,
-                 'Numbers of assigned and actual boards are different')
+    assert_equal(itm_lists.size, item.lists.size,
+                 'Numbers of assigned and actual lists are different')
 
     itm_cats = [categories(:category_0), categories(:category_7)]
     item.categories = itm_cats
     assert(item.save, 'Item is not saved')
     assert_equal(itm_name, item.name, 'Passed and actual names are different')
-    assert_equal(itm_boards.size, item.boards.size,
-                 'Numbers of assigned and actual boards are different')
+    assert_equal(itm_lists.size, item.lists.size,
+                 'Numbers of assigned and actual lists are different')
     assert_equal(itm_cats.size, item.categories.size,
                  'Numbers of assigned and actual categories are different')
 
     itm_desc = 'Ipsum test descriptsum'
-    itm_boards << boards(:board_0) << boards(:board_4)
+    itm_lists << lists(:list_0) << lists(:list_4)
     itm_cats << categories(:category_4)
     item = Item.new(name: itm_name, description: itm_desc,
-                    boards: itm_boards, categories: itm_cats)
+                    lists: itm_lists, categories: itm_cats)
     assert(item.save, 'Item is not saved')
     assert_equal(itm_name, item.name, 'Passed and actual names are different')
     assert_equal(itm_desc, item.description,
                  'Passed and actual descriptions are different')
-    assert_equal(itm_boards.size, item.boards.size,
-                 'Numbers of assigned and actual boards are different')
+    assert_equal(itm_lists.size, item.lists.size,
+                 'Numbers of assigned and actual lists are different')
     assert_equal(itm_cats.size, item.categories.size,
                  'Numbers of assigned and actual categories are different')
   end

@@ -11,7 +11,7 @@ WyshmeApi::Application.routes.draw do
       get :me, on: :collection
     end
 
-    resources :boards, except: [:new]
+    resources :lists, except: [:new]
 
     resources :items, except: [:new] do
       put :like, on: :member
