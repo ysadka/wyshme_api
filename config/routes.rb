@@ -14,8 +14,9 @@ WyshmeApi::Application.routes.draw do
     resources :lists, except: [:new]
 
     resources :items, except: [:new] do
-      put :like, on: :member
-      put :wysh, on: :member
+      put :like,          on: :member
+      put :wysh,          on: :member
+      get :latest_wyshes, on: :member
     end
 
     resources :categories, except: [:new]

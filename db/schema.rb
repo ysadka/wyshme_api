@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140108220423) do
+ActiveRecord::Schema.define(version: 20140109005736) do
 
   create_table "categories", force: true do |t|
     t.string   "name",        null: false
@@ -54,8 +54,10 @@ ActiveRecord::Schema.define(version: 20140108220423) do
   add_index "item_likes", ["user_id"], name: "index_item_likes_on_user_id"
 
   create_table "item_wyshes", force: true do |t|
-    t.integer "user_id"
-    t.integer "item_id"
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "item_wyshes", ["item_id"], name: "index_item_wyshes_on_item_id"
