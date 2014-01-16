@@ -19,6 +19,7 @@ WyshmeApi::Application.routes.draw do
     end
 
     resources :categories, except: [:new]
+    resources :events
   end
 
   root to: 'static_pages#index'
